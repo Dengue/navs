@@ -1,0 +1,36 @@
+* {
+	margin:0;
+	padding:0;
+}
+.accordeon {
+	margin:100px 0px 0px 100px;
+}
+.accordeonLevel{
+	list-style: none;
+
+}
+.hide {
+	display: none;
+}
+.accordeonItem{
+	width:300px;
+}
+
+.accordeonItem > a{
+	height: 30px;
+	line-height: 30px;
+	display: block;
+	text-align: center;
+	background-color: #444;
+	color:#fff;
+	border-bottom: 1px solid #fff;
+	text-decoration: none;
+}
+.accordeonItem > p{
+	background-color: #ccc;
+	border-bottom: 1px solid #fff;
+	word-wrap:break-word;
+}
+.content {
+	margin-left: 40px;
+}
