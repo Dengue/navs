@@ -77,4 +77,3 @@ var toogleText = function(e){
 		next = next.nextSibling;
 	}
 }
-createAccordeon(JSON.stringify({Example1:["John","is","cool"],Example2:"42"}));

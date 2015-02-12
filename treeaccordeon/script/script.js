@@ -83,4 +83,3 @@ var toogleText = function(e){
 		next = next.nextSibling;
 	}
 }
-parseJSON(JSON.stringify({Example1:["John","is","cool"],Example2:"42",Example3:{subExample:"good"}}));
