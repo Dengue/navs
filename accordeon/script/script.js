@@ -1,6 +1,6 @@
 var createAccordeon = function(jsonObject){
 	var accordeon = document.getElementById("accordeon");
-	accordeon.innerHTML = "<ul class='accordeon-level'></ul>";
+	accordeon.innerHTML = "<ul class='accordeonLevel'></ul>";
 	parseJSON(jsonObject);
 }
 
@@ -36,40 +36,46 @@ var createAccordeonLevel = function(nodeToInsert,accordeonData){
 	} //if
 };
 
-var createInset = function(insetTitle,insetData){
-	var accordLevel = document.getElementsByClassName("accordeonLevel")[0];
+var createInset = (function(){
+	var tabIndex = 1;
+	var createInset = function(insetTitle,insetData){
+		var accordLevel = document.getElementsByClassName("accordeonLevel")[0];
 				
-	var li = document.createElement('li');
-	accordLevel.appendChild(li);
+		var li = document.createElement('li');
+		accordLevel.appendChild(li);
 
-	var accordeonItem = document.createElement('div');
-	accordeonItem.classList.add("accordeonItem");
-	li.appendChild(accordeonItem);
+		var accordeonItem = document.createElement('div');
+		accordeonItem.classList.add("accordeonItem");
+		li.appendChild(accordeonItem);
 
-	// creation of title
-	var a = document.createElement("a");
-	a.setAttribute("href","#");
-	a.addEventListener('click',toogleText);
-	a.appendChild(document.createTextNode(insetTitle));
-	accordeonItem.appendChild(a);
+		// creation of title
+		var a = document.createElement("a");
+		a.tabIndex = tabIndex++;
+		a.setAttribute("href","#");
+		a.addEventListener('click',toogleText);
+		a.addEventListener('focus',toogleText);
+		a.appendChild(document.createTextNode(insetTitle));
+		accordeonItem.appendChild(a);
 
-	//creation of textdata
-	var p;
-	if(Array.isArray(insetData)){
-		for(var i = 0; i < insetData.length; i++){
+		//creation of textdata	
+		var p;
+		if(Array.isArray(insetData)){
+			for(var i = 0; i < insetData.length; i++){
+				p = document.createElement("p");
+				p.classList.add("hide");
+				p.appendChild(document.createTextNode(insetData[i]));
+				accordeonItem.appendChild(p);
+			}
+		}
+		else{
 			p = document.createElement("p");
 			p.classList.add("hide");
-			p.appendChild(document.createTextNode(insetData[i]));
+			p.appendChild(document.createTextNode(insetData));
 			accordeonItem.appendChild(p);
 		}
 	}
-	else{
-		p = document.createElement("p");
-		p.classList.add("hide");
-		p.appendChild(document.createTextNode(insetData));
-		accordeonItem.appendChild(p);
-	}
-}
+	return createInset;
+})();
 var toogleText = function(e){
 	var next = this.nextSibling;
 	while(next){

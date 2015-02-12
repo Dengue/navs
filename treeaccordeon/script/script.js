@@ -48,14 +48,21 @@ var createAccordeonItem = function(nodeToInsert,insetTitle,insetData){
 		createInset(accordeonItem,insetData);
 	}
 }
-var createTitle = function(nodeToInsert,insetTitle){
-	// creation of title
-	var a = document.createElement("a");
-	a.setAttribute("href","#");
-	a.addEventListener('click',toogleText);
-	a.appendChild(document.createTextNode(insetTitle));
-	nodeToInsert.appendChild(a);
-}
+
+var createTitle = (function(){
+	var tabIndex = 1;
+	var createTitle = function(nodeToInsert,insetTitle){
+		// creation of title
+		var a = document.createElement("a");
+		a.tabIndex = tabIndex++;
+		a.setAttribute("href","#");
+		a.addEventListener('click',toogleText);
+		a.addEventListener("focus",toogleText);
+		a.appendChild(document.createTextNode(insetTitle));
+		nodeToInsert.appendChild(a);
+	}
+	return createTitle;
+})();
 var createInset = function(nodeToInsert,insetData){
 	//creation of textdata
 	var p;
